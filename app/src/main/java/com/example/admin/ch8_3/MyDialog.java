@@ -23,27 +23,27 @@ public class MyDialog extends DialogFragment {
         dlg.setArguments(args);
         return dlg;
     }
-
+    //Dialog "確定"按鈕被點擊須執行的動作監聽物件
     DialogInterface.OnClickListener p_click = new DialogInterface.OnClickListener(){
         public void onClick(DialogInterface dialogInterface, int whichButton){
-
+            ((MainActivity)getActivity()).btn_frag1_do_P_Click();  //getActivity()強制轉換(MainActivity)成物件
         }
     };
-
+    //Dialog "取消"按鈕被點擊須執行的動作監聽物件
     DialogInterface.OnClickListener n_click = new DialogInterface.OnClickListener(){
         public void onClick(DialogInterface dialogInterface, int whichButton){
-
+            ((MainActivity)getActivity()).btn_frag1_do_N_Click(); //getActivity()強制轉換(MainActivity)成物件
         }
     };
-
-    public Dialog onCreateDialog(Bundle saveInstanceState){ //建立Dialog被呼叫會做的事
-        String title = getArguments().getString("title");
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(title)
-                .setMessage("Close Program?")
-                .setPositiveButton("OK", p_click)
-                .setNegativeButton("Cancel", n_click);
-        return builder.create();
+    //Dialog物件生成當下需執行的動作→Dialog被呼叫會做的事
+    public Dialog onCreateDialog(Bundle saveInstanceState){
+        String title = getArguments().getString("title");                                          //取得參數title
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());                    //建立dialog原生物件
+        builder.setTitle(title)                                                                   //設定title
+                .setMessage("確認結束本程式?")                                                   //設定內文訊息
+                .setPositiveButton("確定", p_click)                                               //設定確定按鈕
+                .setNegativeButton("取消", n_click);                                              //設定取消按鈕
+        return builder.create();                                                                   //建立dialog
     }
 
 
